@@ -1,0 +1,8 @@
+Todo: 
+The support for whole rows and single word colorisation is not completly
+done. If rows are already completly colorized and a substring will match
+too, the old color will be reset at the end. This will be fixed somewhere
+in the future ...
+
+
+
