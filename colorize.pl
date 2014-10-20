@@ -36,6 +36,7 @@ my @searchstring ;
 my @colorcode ; 
 my @paintway ;
 my @colorpresets = ("u18", "u28", "u38", "u48", "u78", "l10", "l20", "l30", "l40", "l70", "l11", "l22", "l33", "l74", "l76") ;
+my $i = 0;
 
 # main 
 #
@@ -55,8 +56,9 @@ foreach $argsnum (0 .. $argscount) {
 	if ($ARGV[$argsnum] ne "--html") {
 		my $tempstring = $ARGV[$argsnum] ; 
 		if ($ARGV[$argsnum] =~ /^[-|+]:/) {
+			if ($i == @colorpresets) {$i=0;}
 			($paintway[$argsnum],$searchstring[$argsnum]) = $ARGV[$argsnum] =~ m/^([-|+]):(.*)$/  ; 
-			$tempstring  = $paintway[$argsnum] .(shift @colorpresets).":".$searchstring[$argsnum] ;
+			$tempstring  = $paintway[$argsnum] .$colorpresets[$i++].":".$searchstring[$argsnum] ;
 		}
 		($paintway[$argsnum], my $ttype, my $tfcol, my $tbcol, $searchstring[$argsnum]) = $tempstring =~ m/^([-|+])(i|u|n|l|b)([0-7])([0-8]):(.*)$/ ;  
 		my $type ; 
