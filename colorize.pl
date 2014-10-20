@@ -36,6 +36,7 @@ my @searchstring ;
 my @colorcode ; 
 my @paintway ;
 my @colorpresets = ("u18", "u28", "u38", "u48", "u78", "l10", "l20", "l30", "l40", "l70", "l11", "l22", "l33", "l74", "l76") ;
+my @htmlcolorpresets = ("u18", "u28", "u68", "u48", "u58", "l10", "l20", "l30", "l40", "l70", "l01", "l02", "l03", "l04", "l06") ;
 my $i = 0;
 
 # main 
@@ -49,6 +50,7 @@ foreach $argsnum (0 .. $argscount) {
 	if ($ARGV[$argsnum] eq "--html") {
 		$htmlout = 1;
 		htmlheader();
+		@colorpresets = @htmlcolorpresets;
 	}
 }
 
