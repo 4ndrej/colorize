@@ -36,6 +36,8 @@ my @searchstring ;
 my @colorcode ; 
 my @paintway ;
 my @colorpresets = ("u18", "u28", "u38", "u48", "u78", "l10", "l20", "l30", "l40", "l70", "l11", "l22", "l33", "l74", "l76") ;
+my @htmlcolorpresets = ("u18", "u28", "u68", "u48", "u58", "l10", "l20", "l30", "l40", "l70", "l01", "l02", "l03", "l04", "l06") ;
+my $i = 0;
 
 # main 
 #
@@ -48,6 +50,7 @@ foreach $argsnum (0 .. $argscount) {
 	if ($ARGV[$argsnum] eq "--html") {
 		$htmlout = 1;
 		htmlheader();
+		@colorpresets = @htmlcolorpresets;
 	}
 }
 
@@ -55,8 +58,9 @@ foreach $argsnum (0 .. $argscount) {
 	if ($ARGV[$argsnum] ne "--html") {
 		my $tempstring = $ARGV[$argsnum] ; 
 		if ($ARGV[$argsnum] =~ /^[-|+]:/) {
+			if ($i == @colorpresets) {$i=0;}
 			($paintway[$argsnum],$searchstring[$argsnum]) = $ARGV[$argsnum] =~ m/^([-|+]):(.*)$/  ; 
-			$tempstring  = $paintway[$argsnum] .(shift @colorpresets).":".$searchstring[$argsnum] ;
+			$tempstring  = $paintway[$argsnum] .$colorpresets[$i++].":".$searchstring[$argsnum] ;
 		}
 		($paintway[$argsnum], my $ttype, my $tfcol, my $tbcol, $searchstring[$argsnum]) = $tempstring =~ m/^([-|+])(i|u|n|l|b)([0-7])([0-8]):(.*)$/ ;  
 		my $type ; 
@@ -73,9 +77,9 @@ foreach $argsnum (0 .. $argscount) {
 			about (); 
 		}
 		if ($htmlout == 1) {
-			if ($type eq 'i') {
+			if ($ttype eq 'i') {
 				$colorcode[$argsnum]="<span class=\"color_bg_".($tfcol+30)." color_fg_".($tbcol+40)."\" >";
-			} elsif ($type eq 'l') { 
+			} elsif ($ttype eq 'l') { 
 				$colorcode[$argsnum]="<span class=\"color_light_fg_".($tfcol+30)." color_light_bg_".($tbcol+40)."\" >" ;
 			} else {
 				$colorcode[$argsnum]="<span class=\"color_style_".$ttype." color_fg_".($tfcol+30)." color_bg_".($tbcol+40)."\" >";
