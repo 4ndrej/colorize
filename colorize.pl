@@ -73,9 +73,9 @@ foreach $argsnum (0 .. $argscount) {
 			about (); 
 		}
 		if ($htmlout == 1) {
-			if ($type eq 'i') {
+			if ($ttype eq 'i') {
 				$colorcode[$argsnum]="<span class=\"color_bg_".($tfcol+30)." color_fg_".($tbcol+40)."\" >";
-			} elsif ($type eq 'l') { 
+			} elsif ($ttype eq 'l') { 
 				$colorcode[$argsnum]="<span class=\"color_light_fg_".($tfcol+30)." color_light_bg_".($tbcol+40)."\" >" ;
 			} else {
 				$colorcode[$argsnum]="<span class=\"color_style_".$ttype." color_fg_".($tfcol+30)." color_bg_".($tbcol+40)."\" >";
